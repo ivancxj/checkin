@@ -23,6 +23,9 @@ gem 'jbuilder', '~> 2.2.4'
 gem 'grape', '~> 0.9.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
+gem 'settingslogic', '~> 2.0.9'
+gem 'by_star', git: 'git://github.com/radar/by_star'
+
 gem 'puma', '~> 2.10.2'
 
 group :development, :test do

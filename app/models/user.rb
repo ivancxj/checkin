@@ -1,6 +1,8 @@
 #encoding: utf-8
 class User < ActiveRecord::Base
 
+  has_many :histories
+
   #********全部字段
   # :mobile,     default: ''
   # :avatar,     default: ''

@@ -33,7 +33,7 @@ module CheckinApi
       # https://github.com/whitequark/rack-utf8_sanitizer
       api_params.each { |k, v| v.force_encoding(Encoding::UTF_8) if v.is_a?(String) }
 
-      @@request_logger.info "t=#{Time.now}_._._ip=#{env['action_dispatch.remote_ip'].to_s}_._._m=#{env['REQUEST_METHOD']}_._._path=#{env['REQUEST_PATH']}_._._params=#{api_params.to_json}_._._user_id=#{current_user_id}"
+      # @@request_logger.info "t=#{Time.now}_._._ip=#{env['action_dispatch.remote_ip'].to_s}_._._m=#{env['REQUEST_METHOD']}_._._path=#{env['REQUEST_PATH']}_._._params=#{api_params.to_json}_._._user_id=#{current_user_id}"
 
       # puts "t=#{Time.now}_._._ip=#{env['action_dispatch.remote_ip'].to_s}_._._m=#{env['REQUEST_METHOD']}_._._path=#{env['REQUEST_PATH']}_._._params=#{api_params.to_json}_._._user_id=#{current_user_id}"
     end

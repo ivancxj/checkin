@@ -33,9 +33,7 @@ module CheckinApi
         end
 
         Jbuilder.encode do |json|
-          json.user do
-            json.name user.name
-          end
+          json.name user.name
         end
 
       end # 注册
@@ -52,21 +50,40 @@ module CheckinApi
       get :checkin do
         auth!
 
-        history = History.new
-        history.user_id = current_user_id
-        history.save
+        user = User.where(id: current_user_id).first
+        if user.present?
+          halt403 101 if user.imei != params[:imei]
 
+          history = History.new
+          history.user_id = current_user_id
+          history.save
 
-        Jbuilder.encode do |json|
-          json.history do
-            json.created_at format_time history.created_at
-            json.success true
+          Jbuilder.encode do |json|
+            t = history.created_at
+            # 9点 - 10点 算迟到
+            if t.hour == 9 and t.min > 0
+              json.later true
+              json.msg "Check in later for #{t.min} minutes"
+            else
+              json.later false
+              json.msg "Check in Success at #{t.strftime('%H:%M:%S')}"
+            end
           end
+
+        else
+          error!({error: '401 Unauthorized'}, 401)
         end
 
-
-
       end # 签到
+
+      desc '邮件发送'
+      get :mail do
+
+        # User
+        url = 'http://www.baidu.com'
+        ReportMailer.notify('熊猫美妆签到报表', url).deliver
+        ok_200
+      end
 
 
     end

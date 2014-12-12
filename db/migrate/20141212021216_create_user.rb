@@ -8,6 +8,7 @@ class CreateUser < ActiveRecord::Migration
       t.string     :remark,     default: ''
       t.integer    :lng, comment: '经度', default: 0
       t.integer    :lat, comment: '纬度', default: 0
+      t.boolean    :enabled,    default: true
 
       t.string     :encrypted_password
       t.string     :reset_password_token

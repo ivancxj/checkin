@@ -1,0 +1,22 @@
+defaults: &defaults
+
+  email:
+    delivery_method: :smtp
+    server: smtp.exmail.qq.com
+    port: 25
+    domain: qq.com
+    authentication: :login
+    sender: no-reply@shiyimm.com
+    password: shiyimm123
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+
+
+
