@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20141212024045) do
     t.string   "remark",                 default: ""
     t.integer  "lng",                    default: 0
     t.integer  "lat",                    default: 0
+    t.boolean  "enabled",                default: true
     t.string   "encrypted_password"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"

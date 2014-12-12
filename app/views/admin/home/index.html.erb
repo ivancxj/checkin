@@ -1,4 +1,3 @@
-
 <style>
     body {
         color: #333;
@@ -26,6 +25,32 @@
     }
 </style>
 
-<div class="date">日期：2014/12/12</div>
-<div class="item">汤唯：<span>9:12</span><span>12:12</span></div>
-<div class="item">汤唯：<span>9:12</span><span>12:12</span></div>
+<div class="date">日期：<%= Time.now.strftime('%Y/%m/%d') %></div>
+<% @users_today.each do |user| %>
+    <div class="item"><%= user.name %>：
+      <% histories = user.histories_today %>
+      <% if histories.length <= 2 %>
+          <% histories.each do |history| %>
+              <span><%= history.created_at.strftime('%H:%M:%S') %></span>
+          <% end %>
+      <% else %>
+          <span><%= histories.first.created_at.strftime('%H:%M:%S') %></span>
+          <span><%= histories.last.created_at.strftime('%H:%M:%S') %></span>
+      <% end %>
+    </div>
+<% end %>
+
+<div class="date">日期：<%= (Time.now - 1.days).strftime('%Y/%m/%d') %></div>
+<% @users_yesterday.each do |user| %>
+    <div class="item"><%= user.name %>：
+      <% histories = user.histories_yesterday %>
+      <% if histories.length <= 2 %>
+          <% histories.each do |history| %>
+              <span><%= history.created_at.strftime('%H:%M:%S') %></span>
+          <% end %>
+      <% else %>
+          <span><%= histories.first.created_at.strftime('%H:%M:%S') %></span>
+          <span><%= histories.last.created_at.strftime('%H:%M:%S') %></span>
+      <% end %>
+    </div>
+<% end %>

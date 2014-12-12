@@ -13,7 +13,7 @@ module CheckinApi
         # optional :model
         # optional :resolution
       end
-      post :login do
+      get :login do
 
         user = User.where(name: params[:name]).first
         if user.present?
@@ -23,7 +23,6 @@ module CheckinApi
             User.transaction do
               user = User.new(name: params[:name], imei: params[:imei])
               user.save!
-              env['rack.session'][:user_id] = user.id
             end
           rescue
             #Rails.logger.error "error:#{$!} at:#{$@}"
@@ -31,6 +30,8 @@ module CheckinApi
           end
 
         end
+
+        env['rack.session'][:user_id] = user.id
 
         Jbuilder.encode do |json|
           json.name user.name
