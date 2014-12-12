@@ -10,7 +10,7 @@ module CheckinApi
         requires :imei
         # optional :platform
         # optional :platform_v
-        # optional :model
+        optional :model
         # optional :resolution
       end
       get :login do
@@ -21,7 +21,10 @@ module CheckinApi
         else
           begin
             User.transaction do
-              user = User.new(name: params[:name], imei: params[:imei])
+              opt = {name: params[:name], imei: params[:imei]}
+              opt[:model] = params[:model]
+
+              user = User.new(opt)
               user.save!
             end
           rescue

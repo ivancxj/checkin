@@ -35,7 +35,7 @@
           <% end %>
       <% else %>
           <span><%= histories.first.created_at.strftime('%H:%M:%S') %></span>
-          <span><%= histories.last.created_at.strftime('%H:%M:%S') %></span>
+          <span><%= histories.last.created_at.syutime('%H:%M:%S') %></span>
       <% end %>
     </div>
 <% end %>
