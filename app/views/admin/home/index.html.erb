@@ -27,23 +27,35 @@
 
 <div class="date">日期：<%= Time.now.strftime('%Y/%m/%d') %></div>
 <% @users_today.each do |user| %>
-    <div class="item"><%= user.name %>：
+    <div class="item">
       <% histories = user.histories_today %>
+      <% if histories.any?{|h| (h.created_at.hour < 9) or (h.created_at.hour == 9 and h.created_at.min == 0)}%>
+          <%= user.name %> ：
+      <% else %>
+          <span style="color: #ff0000"><%= user.name %> ：</span>
+      <% end %>
+
       <% if histories.length <= 2 %>
           <% histories.each do |history| %>
               <span><%= history.created_at.strftime('%H:%M:%S') %></span>
           <% end %>
       <% else %>
           <span><%= histories.first.created_at.strftime('%H:%M:%S') %></span>
-          <span><%= histories.last.created_at.syutime('%H:%M:%S') %></span>
+          <span><%= histories.last.created_at.strftime('%H:%M:%S') %></span>
       <% end %>
     </div>
 <% end %>
 
 <div class="date">日期：<%= (Time.now - 1.days).strftime('%Y/%m/%d') %></div>
 <% @users_yesterday.each do |user| %>
-    <div class="item"><%= user.name %>：
+    <div class="item">
+
       <% histories = user.histories_yesterday %>
+      <% if histories.any?{|h| (h.created_at.hour < 9) or (h.created_at.hour == 9 and h.created_at.min == 0)}%>
+          <%= user.name %> ：
+      <% else %>
+          <span style="color: #ff0000"><%= user.name %> ：</span>
+      <% end %>
       <% if histories.length <= 2 %>
           <% histories.each do |history| %>
               <span><%= history.created_at.strftime('%H:%M:%S') %></span>
