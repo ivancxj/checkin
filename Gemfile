@@ -19,7 +19,6 @@ gem 'simple_form', '~> 3.0.3'
 gem 'devise', '~> 3.2.2'
 gem 'kaminari'
 
-gem 'jquery-rails'
 gem 'jbuilder', '~> 2.2.4'
 gem 'grape', '~> 0.9.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc

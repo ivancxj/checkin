@@ -13,7 +13,7 @@ module CheckinApi
         # optional :model
         # optional :resolution
       end
-      get :login do
+      post :login do
 
         user = User.where(name: params[:name]).first
         if user.present?
